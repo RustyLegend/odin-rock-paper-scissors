@@ -23,17 +23,35 @@ function getPlayerMove()
         alert('Please enter a valid prompt.');
 }
 
-function validateWin(player, comp)
+function startRound()
 {
-    if ((player == 'Rock' && comp == 'Paper') || (player == 'Paper' && comp == 'Scissors') || (player == 'Scissors' && comp == 'Rock'))
-        alert("You Lose.\nComputer's move " + comp);
-    else if ((comp == 'Rock' && player == 'Paper') || (comp == 'Paper' && player == 'Scissors') || (comp == 'Scissors' && player == 'Rock'))
-        alert("You Win\nComputer's move " + comp);
+    const player = getPlayerMove();
+    const comp = getComputerMove();
+
+    if ((player == 'Rock' && comp == 'Paper') || (player == 'Paper' && comp == 'Scissors') || (player == 'Scissors' && comp == 'Rock')){
+        alert("You Lose.\nComputer's move: " + comp);
+        compScore++;
+    }
+    else if ((comp == 'Rock' && player == 'Paper') || (comp == 'Paper' && player == 'Scissors') || (comp == 'Scissors' && player == 'Rock')){
+        alert("You Win\nComputer's move: " + comp);
+        playerScore++;
+    }
     else
-        alert("Its a tie\nComputer's move " + comp);
+        alert("Its a tie\nComputer's move: " + comp);
+
+    alert(`Player Score: ${playerScore}\nComputer Score: ${compScore}`);
 }
 
-const playerMove = getPlayerMove();
-const compMove = getComputerMove();
+function playGame()
+{
+    startRound();
+    startRound();
+    startRound();
+    startRound();
+    startRound();
+}
 
-validateWin(playerMove, compMove);
+let playerScore = 0;
+let compScore = 0;
+
+playGame();
