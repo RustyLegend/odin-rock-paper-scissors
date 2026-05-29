@@ -10,7 +10,7 @@ function getComputerMove()
         return 'Scissors';
 }
 
-function getPlayerMove()
+/*function getPlayerMove()
 {
     const move = prompt("Type your move (R/P/S): ");
     if (move.toLowerCase() == 'r')
@@ -21,35 +21,37 @@ function getPlayerMove()
         return 'Scissors';
     else
         alert('Please enter a valid prompt.');
-}
+}*/
 
-function startRound()
+function startRound(player)
 {
-    const player = getPlayerMove();
     const comp = getComputerMove();
+    const scoreBoard = document.querySelector('.score');
 
     if ((player == 'Rock' && comp == 'Paper') || (player == 'Paper' && comp == 'Scissors') || (player == 'Scissors' && comp == 'Rock')){
-        alert("You Lose.\nComputer's move: " + comp);
+        scoreBoard.textContent = "You Lose.\nComputer's move: " + comp;
         compScore++;
     }
     else if ((comp == 'Rock' && player == 'Paper') || (comp == 'Paper' && player == 'Scissors') || (comp == 'Scissors' && player == 'Rock')){
-        alert("You Win\nComputer's move: " + comp);
+        scoreBoard.textContent = "You Win.\nComputer's move: " + comp;
         playerScore++;
     }
     else
-        alert("Its a tie\nComputer's move: " + comp);
+        scoreBoard.textContent = "It's a tie";
 
-    alert(`Player Score: ${playerScore}\nComputer Score: ${compScore}`);
+    const board = document.querySelector('.scoreboard');
+    board.textContent = `Player Score: ${playerScore}\nComputer Score: ${compScore}`;
+
+    
 }
 
-function playGame()
-{
-    startRound();
-    startRound();
-    startRound();
-    startRound();
-    startRound();
-}
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((b) => {
+    b.addEventListener("click",(e) => {
+        startRound(e.target.textContent);
+    });
+});
 
 let playerScore = 0;
 let compScore = 0;
